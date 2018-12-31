@@ -9,7 +9,7 @@ class Expence extends Model
 {
   // 複数代入を許可するプロパティーを明示する
   // 複数代入(http://laravel4.winroad.jp/faq/%E8%A4%87%E6%95%B0%E4%BB%A3%E5%85%A5%E3%81%A8%E3%81%AF/)
-  protected $fillable = ['date', 'name', 'category'];
+  protected $fillable = ['date', 'name', 'category', 'price'];
   // 対応するテーブルを明示する場合
   protected $table = "Expences";
 

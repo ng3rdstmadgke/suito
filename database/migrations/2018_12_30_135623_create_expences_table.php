@@ -19,6 +19,7 @@ class CreateExpencesTable extends Migration
             $table->dateTime('date');
             $table->string('name')->nullable();
             $table->string('category');
+            $table->integer('price')->unsigned();
             $table->index(['user_id', 'date']);
             $table->timestamps();
         });
