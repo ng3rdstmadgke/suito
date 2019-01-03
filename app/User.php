@@ -30,7 +30,16 @@ class User extends Authenticatable
 
   // Expenceへのリレーション(User:Expence = 一:多)
   // 特定ユーザーの全Expenceを取得
-  public function expenses() {
+  public function expences() {
+    /*
+    hasManyはIlluminate\Database\Eloquent\Relations\Relationクラスを継承した
+    Illuminate\Database\Eloquent\Relations\HasManyクラスを返す。
+    Relationクラスは自クラスとMacroableに呼び出されたメソッドが存在しない場合
+    Illuminate\Database\Eloquent\Builderクラスのメソッドを呼び出す(Relation::__call)
+    Builderクラスは自クラスとMacroableに呼び出されたメソッドが存在しない場合
+    Illuminate\Database\Query\Builderクラスのメソッドを呼び出す(Builder::__call)
+    のでHasManyオブジェクトはIlluminate\Database\Query\Builderのメソッドを利用することができる。
+    */
     return $this->hasMany(Expence::class);
   }
 }
