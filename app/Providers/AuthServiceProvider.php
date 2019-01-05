@@ -13,7 +13,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Model'   => 'App\Policies\ModelPolicy',
+        // ExpenceモデルとExpencePolicyの関連付けを行う
+        'App\Expence' => 'App\Policies\ExpencePolicy'
     ];
 
     /**
