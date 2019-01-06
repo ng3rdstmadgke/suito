@@ -3,7 +3,7 @@
   <div class="panel-body">
     <!-- バリデーションエラーの表示 -->
     @include('common.errors')
-    <form action="{{ url('/expences') }}" method="POST" class="form-horizontal">
+    <form action="{{ url('/expences/store') }}" method="POST" class="form-horizontal">
       {{ csrf_field() }}
       <!-- タスク名 -->
       <div class="form-group">

@@ -35,10 +35,10 @@ Auth::routes();
 // (インターフェースはIlluminate\Contracts\Routing\Registrar)
 // Illuminate\Routing\RouteCollectionに登録される
 // ※Routeがどこから来ているのかはわからない
-Route::get('/expences/{month?}'      , 'ExpencesController@index');  // 一覧画面(monthは任意指定)
-Route::get('/expences/create'        , 'ExpencesController@create'); // 作成画面
-Route::post('/expences'              , 'ExpencesController@store');  // 作成
-Route::get('/expences/{expence}'     , 'ExpencesController@show');   // 詳細画面
-Route::get('/expences/{expence}/edit', 'ExpencesController@edit');   // 編集画面
-Route::put('/expences/{expence}'     , 'ExpencesController@update'); // 編集
-Route::delete('/expences/{expence}'  , 'ExpencesController@destroy');// 削除
+Route::get('/expences/{month?}'            , 'ExpencesController@index')->where('month', '20\d{2}-\d{2}');  // 一覧画面(monthは任意指定)
+Route::get('/expences/create'              , 'ExpencesController@create'); // 作成画面
+Route::post('/expences/store'              , 'ExpencesController@store');  // 作成
+Route::get('/expences/{expence}/show'      , 'ExpencesController@show');   // 詳細画面
+Route::get('/expences/{expence}/edit'      , 'ExpencesController@edit');   // 編集画面
+Route::put('/expences/{expence}/update'    , 'ExpencesController@update'); // 編集
+Route::delete('/expences/{expence}/destroy', 'ExpencesController@destroy');// 削除

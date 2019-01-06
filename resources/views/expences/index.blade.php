@@ -37,6 +37,7 @@
             <th>Category</th>
             <th>Price</th>
             <th>&nbsp;</th>
+            <th>&nbsp;</th>
           </thead>
 
           <!-- テーブル本体 -->
@@ -56,8 +57,12 @@
                   <div>{{ $expence->price }}</div>
                 </td>
                 <td>
-                  <!-- TODO: 削除ボタン -->
-                  <form action="{{ url('expences/'.$expence->id) }}" method="POST">
+                  <div>
+                    <a class="btn btn-info" id="show-expence-{{ $expence->id }}" href="{{url('/expences/'.$expence->id.'/show')}}">詳細</a>
+                  </div>
+                </td>
+                <td>
+                  <form action="{{ url('expences/'.$expence->id.'/destroy') }}" method="POST">
                     {{ csrf_field() }}
                     <!-- フォームをDELETEリクエストに見せかけるための隠しフォームを生成する -->
                     <!-- <input type="hidden" name="_method" value="DELETE"> -->
