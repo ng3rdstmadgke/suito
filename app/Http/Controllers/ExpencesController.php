@@ -26,9 +26,12 @@ class ExpencesController extends Controller {
   }
 
   // 一覧画面
-  public function index(Request $request) {
-    // GETパラメータの取得
-    $month = $request->month ?? date('Y-m');
+  public function index(Request $request, $month = null) {
+    if (is_null($month)) {
+      // GETパラメータの取得
+      $month = $request->month ?? date('Y-m');
+      return redirect("/expences/{$month}");
+    }
     $data = [
               'month'    => $month,
               'expences' => $this->expences->userExpences($request->user(), $month),
@@ -98,10 +101,12 @@ class ExpencesController extends Controller {
     // 第二引数はモデルのインスタンス
     $this->authorize('destroy', $expence);
 
+    // 月の取得
+    $month = date('Y-m', strtotime($expence->date));
+
     // 削除
     $expence->delete();
 
-    // TODO: 時間の保持
-    return redirect('/expences');
+    return redirect("/expences/{$month}");
   }
 }

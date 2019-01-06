@@ -35,7 +35,7 @@ Auth::routes();
 // (インターフェースはIlluminate\Contracts\Routing\Registrar)
 // Illuminate\Routing\RouteCollectionに登録される
 // ※Routeがどこから来ているのかはわからない
-Route::get('/expences'               , 'ExpencesController@index');  // 一覧画面
+Route::get('/expences/{month?}'      , 'ExpencesController@index');  // 一覧画面(monthは任意指定)
 Route::get('/expences/create'        , 'ExpencesController@create'); // 作成画面
 Route::post('/expences'              , 'ExpencesController@store');  // 作成
 Route::get('/expences/{expence}'     , 'ExpencesController@show');   // 詳細画面
