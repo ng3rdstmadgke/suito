@@ -10,8 +10,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- AdminLTE -->
+    <!-- <script src="{{ asset('/AdminLTE-2.4.5/dist/js/adminlte.min.js') }}"></script> -->
+    <link href="{{ asset('/AdminLTE-2.4.5/dist/css/AdminLTE.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <link href="{{ asset('/AdminLTE-2.4.5/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
