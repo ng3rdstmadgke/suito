@@ -44,11 +44,23 @@
           <!-- フォームをDELETEリクエストに見せかけるための隠しフォームを生成する -->
           <!-- <input type="hidden" name="_method" value="DELETE"> -->
           {{ method_field('DELETE') }}
-          <button type="submit" id="delete-expence-{{ $expence->id }}" class="btn btn-danger">
+          <button type="submit" id="delete-expence-{{ $expence->id }}" class="btn btn-danger delete-expence">
             <i class="fa fa-btn fa-trash"></i>削除
           </button>
         </form>
       </div>
     </div>
   </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var btns = document.getElementsByClassName("delete-expence");
+  for (btn of btns) {
+    btn.addEventListener("click", function(e) {
+      if (!window.confirm("本当に削除しますか?")) {
+        e.preventDefault();
+      }
+    }, false);
+  }
+}, false);
+</script>
 @endsection
