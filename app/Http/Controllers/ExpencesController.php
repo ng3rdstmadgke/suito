@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use App\Repositories\ExpencesRepository;
 use App\Expence;
+use Validator;
 use Illuminate\Http\Request;
 
 class ExpencesController extends Controller {
@@ -43,13 +44,28 @@ class ExpencesController extends Controller {
 
   // 作成
   public function store(Request $request) {
-    // $request->request->all() でPOSTパラメータを配列で取得する
     $this->validate($request, [
       'date'     => 'required|date',
-      'name'     => 'required|max:255',
+      'name'     => 'max:255',
       'category' => 'required|max:255',
       'price'    => 'required|integer'
     ]);
+    /*
+    // バリデータを作成してから行っても良い
+    // $request->request->all() でPOSTパラメータを配列で取得する
+    // https://readouble.com/laravel/5.5/ja/validation.html#manually-creating-validators
+    $validator = Validator::make($request->all(), [
+      'date'     => 'required|date',
+      'name'     => 'max:255',
+      'category' => 'required|max:255',
+      'price'    => 'required|integer'
+    ]);
+    if ($validator->fails()) {
+      return redirect('/expences/create')
+        ->withInput()             // 入力内容をフラッシュデータに保存。(viewでold('category')のように呼び出す)
+        ->withErrors($validator); // バリデーション失敗時のエラーメッセージをセッションのフラッシュデータとして保存
+    }
+    */
     $request->user()->expences()->create([
         'date'     => $request->date,
         'name'     => $request->name,

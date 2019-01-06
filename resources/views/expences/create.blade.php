@@ -9,25 +9,25 @@
       <div class="form-group">
         <label for="expence-date" class="col-sm-3 control-label">Date</label>
         <div class="col-sm-6">
-          <input type="date" name="date" id="expence-date" class="form-control" value="{{date('Y-m-d')}}" required>
+          <input type="date" name="date" id="expence-date" class="form-control" value="{{old('date') ?? date('Y-m-d')}}" required>
         </div>
       </div>
       <div class="form-group">
         <label for="expence-category" class="col-sm-3 control-label">Category</label>
         <div class="col-sm-6">
-          <input type="text" name="category" id="expence-category" class="form-control" required>
+          <input type="text" name="category" id="expence-category" class="form-control" value="{{old('category')}}" required>
         </div>
       </div>
       <div class="form-group">
         <label for="expence-name" class="col-sm-3 control-label">Name</label>
         <div class="col-sm-6">
-          <input type="text" name="name" id="expence-name" class="form-control">
+          <input type="text" name="name" id="expence-name" class="form-control" value="{{old('name')}}">
         </div>
       </div>
       <div class="form-group">
         <label for="expence-price" class="col-sm-3 control-label">Price</label>
         <div class="col-sm-6">
-          <input type="text" name="price" id="expence-price" class="form-control" required>
+          <input type="text" name="price" id="expence-price" class="form-control" value="{{old('price')}}" required>
         </div>
       </div>
 
