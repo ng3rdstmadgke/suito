@@ -40,5 +40,5 @@ Route::get('/expences/create'              , 'ExpencesController@create'); // �
 Route::post('/expences/store'              , 'ExpencesController@store');  // 作成
 Route::get('/expences/{expence}/show'      , 'ExpencesController@show');   // 詳細画面
 Route::get('/expences/{expence}/edit'      , 'ExpencesController@edit');   // 編集画面
-Route::put('/expences/{expence}/update'    , 'ExpencesController@update'); // 編集
+Route::post('/expences/{expence}/update'    , 'ExpencesController@update'); // 編集
 Route::delete('/expences/{expence}/destroy', 'ExpencesController@destroy');// 削除

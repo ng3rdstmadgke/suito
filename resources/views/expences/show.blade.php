@@ -30,4 +30,25 @@
       </table>
     </div>
   </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-1">
+        <a class="btn btn-primary" href="/expences/{{substr($expence->date, 0, 7)}}">戻る</a>
+      </div>
+      <div class="col-sm-1">
+        <a class="btn btn-warning" href="/expences/{{$expence->id}}/edit">編集</a>
+      </div>
+      <div class="col-sm-1">
+        <form action="{{ url('expences/'.$expence->id.'/destroy') }}" method="POST">
+          {{ csrf_field() }}
+          <!-- フォームをDELETEリクエストに見せかけるための隠しフォームを生成する -->
+          <!-- <input type="hidden" name="_method" value="DELETE"> -->
+          {{ method_field('DELETE') }}
+          <button type="submit" id="delete-expence-{{ $expence->id }}" class="btn btn-danger">
+            <i class="fa fa-btn fa-trash"></i>削除
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 @endsection

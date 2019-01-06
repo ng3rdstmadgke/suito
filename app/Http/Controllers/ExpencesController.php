@@ -49,8 +49,8 @@ class ExpencesController extends Controller {
   public function store(Request $request) {
     $this->validate($request, [
       'date'     => 'required|date',
-      'name'     => 'max:255',
       'category' => 'required|max:255',
+      'name'     => 'max:255',
       'price'    => 'required|integer'
     ]);
     /*
@@ -71,12 +71,13 @@ class ExpencesController extends Controller {
     */
     $request->user()->expences()->create([
         'date'     => $request->date,
-        'name'     => $request->name,
         'category' => $request->category,
+        'name'     => $request->name,
         'price'    => $request->price
     ]);
 
-    return redirect('/expences/create');
+    $month = date('Y-m', strtotime($request->date));
+    return redirect("/expences/{$month}");
   }
 
   // 詳細画面
@@ -85,9 +86,21 @@ class ExpencesController extends Controller {
     return view('expences.show', ['expence' => $expence]);
   }
 
-  public function edit() {
+  public function edit(Request $request, Expence $expence) {
+    $this->authorize('destroy', $expence);
+    return view('expences.edit', ['expence' => $expence]);
   }
-  public function update() {
+  public function update(Request $request, Expence $expence) {
+    Log::debug("hello");
+    $this->authorize('destroy', $expence);
+    $post = $request->all();
+    $expence->date     = $post['date'];
+    $expence->category = $post['category'];
+    $expence->name     = $post['name'];
+    $expence->price    = $post['price'];
+    $expence->save();
+    $month = date('Y-m', strtotime($post['date']));
+    return redirect("/expences/{$month}");
   }
 
   // 削除
@@ -104,13 +117,10 @@ class ExpencesController extends Controller {
     // 第一引数は呼び出したいポリシーメソッドの名前
     // 第二引数はモデルのインスタンス
     $this->authorize('destroy', $expence);
-
     // 月の取得
     $month = date('Y-m', strtotime($expence->date));
-
     // 削除
     $expence->delete();
-
     return redirect("/expences/{$month}");
   }
 }

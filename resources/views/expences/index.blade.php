@@ -15,6 +15,7 @@
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
           <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>更新</button>
+          <a class="btn btn-success" href="/expences/create">新規作成</a>
         </div>
       </div>
     </form>
@@ -37,7 +38,6 @@
             <th>Name</th>
             <th>Price</th>
             <th>&nbsp;</th>
-            <th>&nbsp;</th>
           </thead>
 
           <!-- テーブル本体 -->
@@ -48,19 +48,24 @@
                 <td class="table-text"><div>{{ $expence->category }}</div></td>
                 <td class="table-text"><div>{{ $expence->name }}</div></td>
                 <td class="table-text"><div>{{ $expence->price }}</div></td>
-                <td>
+                <td class="row">
+                  <div class="col-sm-2">
                     <a class="btn btn-info" id="show-expence-{{ $expence->id }}" href="{{url('/expences/'.$expence->id.'/show')}}">詳細</a>
-                </td>
-                <td>
-                  <form action="{{ url('expences/'.$expence->id.'/destroy') }}" method="POST">
-                    {{ csrf_field() }}
-                    <!-- フォームをDELETEリクエストに見せかけるための隠しフォームを生成する -->
-                    <!-- <input type="hidden" name="_method" value="DELETE"> -->
-                    {{ method_field('DELETE') }}
-                    <button type="submit" id="delete-expence-{{ $expence->id }}" class="btn btn-danger">
-                      <i class="fa fa-btn fa-trash"></i>削除
-                    </button>
-                  </form>
+                  </div>
+                  <div class="col-sm-2">
+                    <a class="btn btn-warning" href="/expences/{{$expence->id}}/edit">編集</a>
+                  </div>
+                  <div class="col-sm-2">
+                    <form action="{{ url('expences/'.$expence->id.'/destroy') }}" method="POST">
+                      {{ csrf_field() }}
+                      <!-- フォームをDELETEリクエストに見せかけるための隠しフォームを生成する -->
+                      <!-- <input type="hidden" name="_method" value="DELETE"> -->
+                      {{ method_field('DELETE') }}
+                      <button type="submit" id="delete-expence-{{ $expence->id }}" class="btn btn-danger">
+                        <i class="fa fa-btn fa-trash"></i>削除
+                      </button>
+                    </form>
+                  </div>
                 </td>
               </tr>
             @endforeach
