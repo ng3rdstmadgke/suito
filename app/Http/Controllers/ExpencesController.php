@@ -79,8 +79,12 @@ class ExpencesController extends Controller {
     return redirect('/expences/create');
   }
 
-  public function show() {
+  // 詳細画面
+  public function show(Request $request, Expence $expence) {
+    $this->authorize('destroy', $expence);
+    return view('expences.show', ['expence' => $expence]);
   }
+
   public function edit() {
   }
   public function update() {

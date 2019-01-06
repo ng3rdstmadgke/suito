@@ -14,7 +14,7 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
-          <button type="submit" class="btn btn-default"><i class="fa fa-plus"></i>更新</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>更新</button>
         </div>
       </div>
     </form>
@@ -33,8 +33,8 @@
           <!-- テーブルヘッダ -->
           <thead>
             <th>Date</th>
-            <th>Name</th>
             <th>Category</th>
+            <th>Name</th>
             <th>Price</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
@@ -44,22 +44,12 @@
           <tbody>
             @foreach ($expences as $expence)
               <tr>
-                <td class="table-text">
-                  <div>{{ $expence->date }}</div>
-                </td>
-                <td class="table-text">
-                  <div>{{ $expence->name }}</div>
-                </td>
-                <td class="table-text">
-                  <div>{{ $expence->category }}</div>
-                </td>
-                <td class="table-text">
-                  <div>{{ $expence->price }}</div>
-                </td>
+                <td class="table-text"><div>{{ substr($expence->date, 0, 10) }}</div></td>
+                <td class="table-text"><div>{{ $expence->category }}</div></td>
+                <td class="table-text"><div>{{ $expence->name }}</div></td>
+                <td class="table-text"><div>{{ $expence->price }}</div></td>
                 <td>
-                  <div>
                     <a class="btn btn-info" id="show-expence-{{ $expence->id }}" href="{{url('/expences/'.$expence->id.'/show')}}">詳細</a>
-                  </div>
                 </td>
                 <td>
                   <form action="{{ url('expences/'.$expence->id.'/destroy') }}" method="POST">
