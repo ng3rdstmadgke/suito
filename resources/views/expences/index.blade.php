@@ -2,6 +2,10 @@
 
 @section('content')
   <!-- タスクフォームの作成… -->
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    抽出期間
+  </div>
   <div class="panel-body">
     <form action="{{ url('/expences') }}" method="GET" class="form-horizontal">
       {{ csrf_field() }}
@@ -14,11 +18,12 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
-          <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>更新</button>
-          <a class="btn btn-success" href="/expences/create">新規作成</a>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-refresh"></i> <span>更新</span></button>
+          <a class="btn btn-success" href="/expences/create"><i class="fa fa-plus"></i> <span>新規作成</span></a>
         </div>
       </div>
     </form>
+  </div>
   </div>
 
   <!-- 現在のタスク -->
@@ -29,15 +34,15 @@
       </div>
 
       <div class="panel-body">
-        <table class="table table-striped expence-table">
+        <table class="table table-hover table-bordered">
 
           <!-- テーブルヘッダ -->
-          <thead>
-            <th>Date</th>
-            <th>Category</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>&nbsp;</th>
+          <thead class="row">
+            <th class="col-sm-1">日付</th>
+            <th class="col-sm-2">カテゴリ</th>
+            <th class="col-sm-2">名前</th>
+            <th class="col-sm-1">金額</th>
+            <th class="col-sm-3">&nbsp;</th>
           </thead>
 
           <!-- テーブル本体 -->
@@ -49,20 +54,20 @@
                 <td class="table-text"><div>{{ $expence->name }}</div></td>
                 <td class="table-text"><div>{{ $expence->price }}</div></td>
                 <td class="row">
-                  <div class="col-sm-2">
-                    <a class="btn btn-info" id="show-expence-{{ $expence->id }}" href="{{url('/expences/'.$expence->id.'/show')}}">詳細</a>
+                  <div class="col-sm-4">
+                    <a class="btn btn-info btn-sm" id="show-expence-{{ $expence->id }}" href="{{url('/expences/'.$expence->id.'/show')}}"><i class="fa fa-file-text-o"></i> <span>詳細</span></a>
                   </div>
-                  <div class="col-sm-2">
-                    <a class="btn btn-warning" href="/expences/{{$expence->id}}/edit">編集</a>
+                  <div class="col-sm-4">
+                    <a class="btn btn-warning btn-sm" href="/expences/{{$expence->id}}/edit"><i class="fa fa-pencil"></i> <span>編集</span></a>
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-4">
                     <form action="{{ url('expences/'.$expence->id.'/destroy') }}" method="POST">
                       {{ csrf_field() }}
                       <!-- フォームをDELETEリクエストに見せかけるための隠しフォームを生成する -->
                       <!-- <input type="hidden" name="_method" value="DELETE"> -->
                       {{ method_field('DELETE') }}
-                      <button type="submit" id="delete-expence-{{ $expence->id }}" class="btn btn-danger delete-expence">
-                        <i class="fa fa-btn fa-trash"></i>削除
+                      <button type="submit" id="delete-expence-{{ $expence->id }}" class="btn btn-danger btn-sm delete-expence">
+                        <i class="fa fa-trash"></i> <span>削除<span>
                       </button>
                     </form>
                   </div>

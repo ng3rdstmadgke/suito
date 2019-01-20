@@ -33,7 +33,7 @@
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
           <button type="submit" class="btn btn-warning">
-            <i class="fa fa-plus"></i>更新
+            <i class="fa fa-pencil"></i> <span>更新</span>
           </button>
         </div>
       </div>

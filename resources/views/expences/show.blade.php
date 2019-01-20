@@ -33,10 +33,10 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-1">
-        <a class="btn btn-primary" href="/expences/{{substr($expence->date, 0, 7)}}">戻る</a>
+        <a class="btn btn-primary btn-sm" href="/expences/{{substr($expence->date, 0, 7)}}"><i class="fa fa-angle-double-left"></i> <span>戻る</span></a>
       </div>
       <div class="col-sm-1">
-        <a class="btn btn-warning" href="/expences/{{$expence->id}}/edit">編集</a>
+        <a class="btn btn-warning btn-sm" href="/expences/{{$expence->id}}/edit"><i class="fa fa-pencil"></i> <span>編集</span></a>
       </div>
       <div class="col-sm-1">
         <form action="{{ url('expences/'.$expence->id.'/destroy') }}" method="POST">
@@ -44,8 +44,8 @@
           <!-- フォームをDELETEリクエストに見せかけるための隠しフォームを生成する -->
           <!-- <input type="hidden" name="_method" value="DELETE"> -->
           {{ method_field('DELETE') }}
-          <button type="submit" id="delete-expence-{{ $expence->id }}" class="btn btn-danger delete-expence">
-            <i class="fa fa-btn fa-trash"></i>削除
+          <button type="submit" id="delete-expence-{{ $expence->id }}" class="btn btn-danger btn-sm delete-expence">
+            <i class="fa fa-btn fa-trash"></i> <span>削除</span>
           </button>
         </form>
       </div>

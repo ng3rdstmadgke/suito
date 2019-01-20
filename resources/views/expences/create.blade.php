@@ -35,7 +35,7 @@
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
           <button type="submit" class="btn btn-primary">
-            <i class="fa fa-plus"></i>追加
+            <i class="fa fa-plus"></i> <span>作成</span>
           </button>
         </div>
       </div>
