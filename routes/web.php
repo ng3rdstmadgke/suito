@@ -23,9 +23,7 @@
 削除      destroy              DELETE       /リソース名/{resource}      resource.destroy
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return redirect("/expences"); });
 
 // 認証画面
 Route::get('/home', 'HomeController@index')->name('home');
