@@ -33,7 +33,7 @@
   <script src="{{ asset('/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('/adminlte/dist/js/adminlte.min.js') }}"></script>
 </head>
-<body class="skin-green">
+<body class="skin-green hold-transition sidebar-mini">
   <div class="wrapper">
     @guest
       @component('layouts.guest-menu')
@@ -43,18 +43,16 @@
       @endcomponent
     @endguest
     <div class="content-wrapper">
-      <div class="container-fluid">
-        <section class="content-header">
-          <h1>Page Name<small>Control panel</small></h1>
-          <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">List</a></li>
-          </ol>
-        </section>
-        <section class="content">
-        @yield('content')
-        </section>
-      </div>
+      <section class="content-header">
+        <h1>Page Name<small>Control panel</small></h1>
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">List</a></li>
+        </ol>
+      </section>
+      <section class="content container-fluid">
+      @yield('content')
+      </section>
     </div>
   </div>
 </body>

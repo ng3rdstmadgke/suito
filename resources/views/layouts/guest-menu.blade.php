@@ -22,7 +22,6 @@
         </li>
       </ul>
     </div>
-  
   </nav>
 </header>
 <aside class="main-sidebar">
