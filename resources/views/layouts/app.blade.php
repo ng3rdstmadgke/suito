@@ -11,14 +11,27 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   <!-- AdminLTE -->
-  <link href="{{ asset('/AdminLTE-2.4.5/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('/AdminLTE-2.4.5/dist/css/skins/_all-skins.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('/AdminLTE-2.4.5/bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('/AdminLTE-2.4.5/bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ asset('/AdminLTE-2.4.5/dist/css/AdminLTE.min.css') }}" rel="stylesheet">
-  <script src="{{ asset('/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js') }}"></script>
-  <script src="{{ asset('/AdminLTE-2.4.5/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('/AdminLTE-2.4.5/dist/js/adminlte.min.js') }}"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="{{ asset('/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ asset('/adminlte/bower_components/font-awesome/css/font-awesome.min.css') }}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{{ asset('/adminlte/bower_components/Ionicons/css/ionicons.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('/adminlte/dist/css/AdminLTE.min.css') }}">
+  <!-- AdminLTE Skins -->
+  <link rel="stylesheet" href="{{ asset('/adminlte/dist/css/skins/_all-skins.min.css') }}">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="{{ asset('/adminlte/bower_components/morris.js/morris.css') }}">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="{{ asset('/adminlte/bower_components/jvectormap/jquery-jvectormap.css') }}">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="{{ asset('/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{{ asset('/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+  <script src="{{ asset('/adminlte/bower_components/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ asset('/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('/adminlte/dist/js/adminlte.min.js') }}"></script>
 </head>
 <body class="skin-green">
   <div class="wrapper">
