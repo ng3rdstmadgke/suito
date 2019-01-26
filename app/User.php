@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Expence;
+use App\Category;
 
 class User extends Authenticatable
 {
@@ -41,5 +42,10 @@ class User extends Authenticatable
     のでHasManyオブジェクトはIlluminate\Database\Query\Builderのメソッドを利用することができる。
     */
     return $this->hasMany(Expence::class);
+  }
+
+  // Categoryへのリレーション(User:Category = 1:多)
+  public function categories() {
+    return $this->hasMany(Category::class);
   }
 }
