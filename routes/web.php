@@ -40,3 +40,9 @@ Route::get('/expences/{expence}/show'      , 'ExpencesController@show');   // �
 Route::get('/expences/{expence}/edit'      , 'ExpencesController@edit');   // 編集画面
 Route::post('/expences/{expence}/update'    , 'ExpencesController@update'); // 編集
 Route::delete('/expences/{expence}/destroy', 'ExpencesController@destroy');// 削除
+
+
+
+Route::get('/category'                     , 'CategoryController@index');  // 作成画面
+Route::get('/category/create'              , 'CategoryController@create'); // 作成画面
+Route::post('/category/store'               , 'CategoryController@store');  // 作成

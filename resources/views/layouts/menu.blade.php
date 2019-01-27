@@ -36,7 +36,7 @@
   <!-- sidebar: style can be found in sidebar.less -->
   <section class="sidebar">
     <ul class="sidebar-menu" data-widget="tree">
-      <li class="active treeview">
+      <li class="treeview">
         <a href="#"><i class="fa fa-dollar"></i> <span>出費</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -47,6 +47,21 @@
             <i class="fa fa-list"></i> <span>一覧</span>
           </a></li>
           <li><a href="{{ url('/expences/create') }}">
+            <i class="fa fa-plus"></i> <span>新規作成</span>
+          </a></li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a href="#"><i class="fa fa-tags"></i> <span>カテゴリ</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+        <ul class="treeview-menu">
+          <li><a href="{{ url('/category') }}">
+            <i class="fa fa-list"></i> <span>一覧</span>
+          </a></li>
+          <li><a href="{{ url('/category/create') }}">
             <i class="fa fa-plus"></i> <span>新規作成</span>
           </a></li>
         </ul>
