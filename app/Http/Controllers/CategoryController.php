@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+// ファサード
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+
+// モデル
 use App\Category;
 
 class CategoryController extends Controller {
@@ -28,7 +32,6 @@ class CategoryController extends Controller {
   public function create() {
     return view('category.create'); 
   }
-
 
   // 作成
   public function store(Request $request) {
@@ -56,4 +59,30 @@ class CategoryController extends Controller {
     return redirect("/category");
   }
 
+  public function show(Request $request, Category $category) {
+    $this->authorize('destroy', $category);
+    return view('category.show', ['category' => $category]);
+  }
+
+  public function edit(Request $request, Category $category) {
+    $this->authorize('destroy', $category);
+    $data = ['category' => $category];
+    return view('category.edit', $data);
+  }
+
+  public function update(Request $request, Category $category) {
+    $this->authorize('destroy', $category);
+    $this->validate($request, [
+      'name'   => 'required|max:255',
+      'budget' => 'required|integer'
+    ]);
+    $category->fill($request->all())->save();
+    return redirect("/category");
+  }
+
+  public function destroy(Request $request, Category $category) {
+    $this->authorize('destroy', $category);
+    $category->delete();
+    return redirect("/category");
+  }
 }

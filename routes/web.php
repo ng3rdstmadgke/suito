@@ -34,15 +34,19 @@ Auth::routes();
 // Illuminate\Routing\RouteCollectionに登録される
 // ※Routeがどこから来ているのかはわからない
 Route::get('/expences/{month?}'            , 'ExpencesController@index')->where('month', '20\d{2}-\d{2}');  // 一覧画面(monthは任意指定)
-Route::get('/expences/create'              , 'ExpencesController@create'); // 作成画面
-Route::post('/expences/store'              , 'ExpencesController@store');  // 作成
-Route::get('/expences/{expence}/show'      , 'ExpencesController@show');   // 詳細画面
-Route::get('/expences/{expence}/edit'      , 'ExpencesController@edit');   // 編集画面
-Route::post('/expences/{expence}/update'    , 'ExpencesController@update'); // 編集
-Route::delete('/expences/{expence}/destroy', 'ExpencesController@destroy');// 削除
+Route::get('/expences/create'              , 'ExpencesController@create');  // 作成画面
+Route::post('/expences/store'              , 'ExpencesController@store');   // 作成
+Route::get('/expences/{expence}/show'      , 'ExpencesController@show');    // 詳細画面
+Route::get('/expences/{expence}/edit'      , 'ExpencesController@edit');    // 編集画面
+Route::post('/expences/{expence}/update'   , 'ExpencesController@update');  // 編集
+Route::delete('/expences/{expence}/destroy', 'ExpencesController@destroy'); // 削除
 
 
 
-Route::get('/category'                     , 'CategoryController@index');  // 作成画面
-Route::get('/category/create'              , 'CategoryController@create'); // 作成画面
-Route::post('/category/store'               , 'CategoryController@store');  // 作成
+Route::get('/category'                      , 'CategoryController@index');   // 一覧画面
+Route::get('/category/create'               , 'CategoryController@create');  // 作成画面
+Route::post('/category/store'               , 'CategoryController@store');   // 作成
+Route::get('/category/{category}/show'      , 'CategoryController@show');    // 詳細画面
+Route::get('/category/{category}/edit'      , 'CategoryController@edit');    // 編集画面
+Route::post('/category/{category}/update'   , 'CategoryController@update');  // 編集
+Route::delete('/category/{category}/destroy', 'CategoryController@destroy'); // 削除

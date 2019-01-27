@@ -2,6 +2,14 @@
 
 @section('content')
   <!--  -->
+  <div class="panel panel-default">
+    <div class="panel-heading">アクション</div>
+    <div class="panel-body">
+      <div class="col-sm-6">
+        <a class="btn btn-success" href="/category/create"><i class="fa fa-plus"></i> <span>新規作成</span></a>
+      </div>
+    </div>
+  </div>
   @if (count($categories) > 0)
     <div class="panel panel-default">
       <div class="panel-heading">Category</div>
