@@ -13,7 +13,15 @@
       <div class="form-group">
         <label for="expence-category" class="col-sm-3 control-label">Category</label>
         <div class="col-sm-6">
-          <input type="text" name="category" id="expence-category" class="form-control" value="{{$expence->category}}" required>
+          <select class="form-control" id="expence-category" name="category_id">
+            @foreach ($categories as $category))
+              @if ($expence->category_id === $category->id)
+                <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+              @else
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+              @endif
+            @endforeach
+          </select>
         </div>
       </div>
       <div class="form-group">

@@ -2,23 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+// リポジトリ
+use App\Repositories\ExpencesRepository;
+use App\Repositories\CategoriesRepository;
+// ファサード
 // ログ出力(ログはstorage/logs/laravel.logに出力される)
 // Log::debug(print_r($request->all(), true));
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Repositories\ExpencesRepository;
+use Illuminate\Support\Facades\Validator;
+// モデル
 use App\Expence;
-use Validator;
-use Illuminate\Http\Request;
+use App\Category;
 
 class ExpencesController extends Controller {
-  // Expencesリポジトリのインスタンス
+  /**
+   * @var ExpencesRepository
+   */
   protected $expences;
+  /**
+   * @var CategoriesRepository
+   */
+  protected $categories;
 
-  public function __construct(ExpencesRepository $expences) {
+  public function __construct(ExpencesRepository $expences, CategoriesRepository $categories) {
     // このコントローラを利用するには認証済みユーザーである必要がある
     // 利用可能なミドルウェアはapp/Http/Kernel.phpに定義されている
     $this->middleware('auth');
     $this->expences = $expences;
+    $this->categories = $categories;
   }
 
   // 一覧画面
@@ -28,33 +41,40 @@ class ExpencesController extends Controller {
       $month = $request->month ?? date('Y-m');
       return redirect("/expences/{$month}");
     }
+    $id = Auth::id();
     $data = [
-              'month'    => $month,
-              'expences' => $this->expences->userExpences($request->user(), $month),
-            ];
+      'month'      => $month,
+      // リレーションを設定しているのでexpenceモデルのインスタンスには
+      // 対応するcategoryモデルのインスタンスが含まれている。($expence->category->name)
+      'expences'   => $this->expences->userExpences($request->user(), $month),
+    ];
     return view('expences.index', $data);
   }
 
 
   // 作成画面
   public function create(Request $request) {
-    return view('expences.create');
+    $data = [
+      'categories' => $this->categories->userCategories($request->user())
+    ];
+    return view('expences.create', $data);
   }
 
   // 作成
   public function store(Request $request) {
     // vendor/laravel/framework/src/Illuminate/Foundation/Validation/ValidatesRequests.php
     $this->validate($request, [
-      'date'     => 'required|date',
-      'category' => 'required|max:255',
-      'name'     => 'max:255',
-      'price'    => 'required|integer'
+      'date'        => 'required|date',
+      'category_id' => 'required|integer',
+      'name'        => 'max:255',
+      'price'       => 'required|integer'
     ]);
+    // TODO: ポリシーによるカテゴリの認証を行う必要あり
     $request->user()->expences()->create([
-        'date'     => $request->date,
-        'category' => $request->category,
-        'name'     => $request->name,
-        'price'    => $request->price
+        'date'        => $request->date,
+        'category_id' => $request->category_id,
+        'name'        => $request->name,
+        'price'       => $request->price
     ]);
 
     $month = date('Y-m', strtotime($request->date));
@@ -69,28 +89,34 @@ class ExpencesController extends Controller {
 
   public function edit(Request $request, Expence $expence) {
     $this->authorize('destroy', $expence);
-    return view('expences.edit', ['expence' => $expence]);
+    $data = [
+      'expence'    => $expence,
+      'categories' => $this->categories->userCategories($request->user())
+    ];
+    return view('expences.edit', $data);
   }
   public function update(Request $request, Expence $expence) {
-    Log::debug("hello");
     $this->authorize('destroy', $expence);
+    $this->validate($request, [
+      'date'        => 'required|date',
+      'category_id' => 'required|integer',
+      'name'        => 'max:255',
+      'price'       => 'required|integer'
+    ]);
     $post = $request->all();
-    $expence->date     = $post['date'];
-    $expence->category = $post['category'];
-    $expence->name     = $post['name'];
-    $expence->price    = $post['price'];
-    $expence->save();
+    $expence->fill($request->all())->save();
     $month = date('Y-m', strtotime($post['date']));
     return redirect("/expences/{$month}");
   }
 
   // 削除
   public function destroy(Request $requests, Expence $expence) {
-    // ルートの{expence}がコントローラメソッドの$task変数定義と一致するとき
-    // {expence}に対応するIDを持つ、モデルインスタンスを自動的に依存注入する。
+    // ルートの{expence}がコントローラメソッドの引数名と一致するとき
+    // タイプヒントされたEloquentモデルで自動的に依存解決する
     // モデルインスタンスがDB上に見つからない場合は404 HTTPレスポンスが自動的に生成される。
-    // https://readouble.com/laravel/5.2/ja/routing.html#route-model-binding
+    // https://readouble.com/laravel/5.5/ja/routing.html#route-model-binding
 
+    // ポリシー https://readouble.com/laravel/5.5/ja/authorization.html 
     // 認証済みユーザが$expenceインスタンスを所有していることを確認するためにポリシー機能による認可を行う
     // Illuminate\Foundation\Auth\Access\AuthorizesRequestsトレイトのauthorizeメソッドを呼び出し
     // ポリシーによる認可を行う(App\Policies\ExpencePolicy)

@@ -15,7 +15,7 @@
           </tr>
           <tr>
             <th scope="row">Category</th>
-            <td>{{$expence->category}}</td>
+            <td>{{$expence->category->name}}</td>
           </tr>
           <tr>
             <th scope="row">Name</th>

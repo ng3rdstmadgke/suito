@@ -50,7 +50,7 @@
             @foreach ($expences as $expence)
               <tr>
                 <td class="table-text"><div>{{ substr($expence->date, 0, 10) }}</div></td>
-                <td class="table-text"><div>{{ $expence->category }}</div></td>
+                <td class="table-text"><div>{{ $expence->category->name }}</div></td>
                 <td class="table-text"><div>{{ $expence->name }}</div></td>
                 <td class="table-text"><div>{{ $expence->price }}</div></td>
                 <td class="row">
