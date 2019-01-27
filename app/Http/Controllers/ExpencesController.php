@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-// ログ出力用(ログはstorage/logs/laravel.logに出力される)
-// ob_start();
-// var_dump();
-// $a = ob_get_contents();
-// ob_end_clean();
-// Log::debug($a);
+// ログ出力(ログはstorage/logs/laravel.logに出力される)
+// Log::debug(print_r($request->all(), true));
 use Illuminate\Support\Facades\Log;
 use App\Repositories\ExpencesRepository;
 use App\Expence;
@@ -47,28 +43,13 @@ class ExpencesController extends Controller {
 
   // 作成
   public function store(Request $request) {
+    // vendor/laravel/framework/src/Illuminate/Foundation/Validation/ValidatesRequests.php
     $this->validate($request, [
       'date'     => 'required|date',
       'category' => 'required|max:255',
       'name'     => 'max:255',
       'price'    => 'required|integer'
     ]);
-    /*
-    // バリデータを作成してから行っても良い
-    // $request->request->all() でPOSTパラメータを配列で取得する
-    // https://readouble.com/laravel/5.5/ja/validation.html#manually-creating-validators
-    $validator = Validator::make($request->all(), [
-      'date'     => 'required|date',
-      'name'     => 'max:255',
-      'category' => 'required|max:255',
-      'price'    => 'required|integer'
-    ]);
-    if ($validator->fails()) {
-      return redirect('/expences/create')
-        ->withInput()             // 入力内容をフラッシュデータに保存。(viewでold('category')のように呼び出す)
-        ->withErrors($validator); // バリデーション失敗時のエラーメッセージをセッションのフラッシュデータとして保存
-    }
-    */
     $request->user()->expences()->create([
         'date'     => $request->date,
         'category' => $request->category,
